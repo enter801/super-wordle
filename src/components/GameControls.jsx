@@ -1,42 +1,58 @@
 import {  useState } from "react";
+import { FormControl, Select, InputLabel, MenuItem } from "@mui/material";
 
 export default function GameConfig(props) {
 
     const { wordLengthData: [wordLength, setWordLength] } = {
-        wordLengthData: useState(3), ...(props.state || {}),
+        wordLengthData: useState(5), ...(props.state || {}),
     };
 
     const { numTriesData: [numTries, setNumTries] } = {
-        numTriesData: useState(3), ...(props.state || {}),
+        numTriesData: useState(6), ...(props.state || {}),
     };
     
     const wordLen = (e) => {
         console.log('triggered')
-      setWordLength(e.currentTarget.value);
+      setWordLength(e.target.value);
     }
 
     const numTry = (e) => {
         console.log('triggered two')
-        setNumTries(e.currentTarget.value);
+        setNumTries(e.target.value);
     }
 
     return (
     <>
-
-                    <input type="" id="wordLengthSelect" onChange={wordLen}>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </Form.Select>
-                    <Form.Label>Word Length = {wordLength}</Form.Label>
-                    <Form.Select id="numTrySelect" onChange={numTry}>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                    </Form.Select>
-                    <Form.Label>Guesses = {numTries}</Form.Label>
-   
-    </>)
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id="wordLengthInputLabel">Word Length</InputLabel>
+        <Select
+        labelId="wordLengthInputLabel"
+        id="wordLengthInput"
+        label="Word Length"
+        value={wordLength}
+        onChange={wordLen}
+        >
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="numTryInputLabel">Guesses</InputLabel>
+        <Select
+        labelId="numTryInputLabel"
+        id="numTryInput"
+        label="Guesses"
+        value={numTries}
+        onChange={numTry}
+        >
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+        </Select>
+      </FormControl>
+    </>
+    )
 }
