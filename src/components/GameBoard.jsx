@@ -1,9 +1,15 @@
 import { CardContent, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useGameContext } from "../GameProvider";
 import WordCard from "./WordCard";
 
-export default function GameBoard(props) {
+const GameBoard = (props) => {
   const { wordLength, numTries } = props;
-  let guesses = [];
+  const {guess, guesses} = useGameContext();
+  
+  useEffect(()=>{
+    console.log('use effect called');
+  }, [guesses, guess]);
 
   const renderLetter = (letter) => {
     return (
@@ -35,7 +41,7 @@ export default function GameBoard(props) {
 
   const renderCompletedLine = (guess, word, length) => {};
 
-  const renderBoard = (width, height, guesses) => {
+  const renderBoard = (width, height, guesses, guess) => {
     //empty/new game
     if (guesses.length == 0) {
       //render blank lines
@@ -52,14 +58,19 @@ export default function GameBoard(props) {
     for (let i = 0; i < width; i++) {}
   };
 
-  const initialBoardSetup = renderBoard(wordLength, numTries, guesses);
-
   return (
     <>
       <div>
         GameBoard - {props.wordLength} - tries - {props.numTries}
       </div>
-      <div id="gameBoard">{initialBoardSetup()}</div>
+      <div id="gameBoard">{
+        guesses.map((val, idx) => {
+          return (<div key="{idx}">{val}</div>);
+        })}
+      </div>
+      <div id="guessTest">{guess}</div>
     </>
   );
 }
+
+export default GameBoard;

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import GameControls from "./GameControls";
-//import GameBoard from "./GameBoard";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import GameKeyboard from "./GameKeyboard";
+import GameBoard from "./GameBoard";
+import { useGameContext } from "../GameProvider";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -30,7 +32,12 @@ export default function GameMain(props) {
           />
         </Item>
         <Item>
-          {/* <GameBoard wordLength={wordLength} numTries={numTries}/> */}
+          <GameBoard wordLength={wordLength} numTries={numTries}>
+          </GameBoard>
+        </Item>
+        <Item>
+          <GameKeyboard wordLength={wordLength}>
+          </GameKeyboard>
         </Item>
       </Stack>
     </>

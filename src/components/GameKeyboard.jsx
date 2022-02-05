@@ -1,25 +1,31 @@
-import { useState } from "react";
+import { useGameContext } from "../GameProvider";
 
-const GameKeyboard = ({ guesses, guess, submitGuess, onKeypress }) => {
+
+
+const GameKeyboard = ({wordLength}) => {
+  const {guess, addGuess, onGuessLetter} = useGameContext();
+
   const handleSubmit = (e) => {
-    submitGuess(guess);
+    e.preventDefault();
+    addGuess(guess);
   };
 
   const handleChange = (e) => {
-    onKeypress(e.currentTarget.value);
+    onGuessLetter(e.currentTarget.value);
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Update your item"
+          pattern="[A-Za-z]+"
+          maxLength={wordLength}
+          minLength={wordLength}
           value={guess}
-          onChange={handleC}
+          onInput={handleChange}
           name="text"
-          ref={inputRef}
-          className="todo-input edit"
         />
-        <button onClick={handleSubmit} />
+        <button>Submit</button>
       </form>
     </>
   );
