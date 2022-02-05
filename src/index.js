@@ -1,15 +1,18 @@
-import * as React from 'react';
-import ReactDOM from 'react-dom';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import App from './App';
-import theme from './theme';
+import * as React from "react";
+import ReactDOM from "react-dom";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import App from "./App";
+import theme from "./theme";
+import GameProvider from "./GameProvider";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <App />
+    <GameProvider>
+      <App />
+    </GameProvider>
   </ThemeProvider>,
-  document.querySelector('#root'),
+  document.querySelector("#root")
 );
