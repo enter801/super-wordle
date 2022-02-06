@@ -12,6 +12,7 @@
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@mui/material": "latest",
+    "ramda": "^0.28.0",
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest"
