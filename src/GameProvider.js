@@ -19,17 +19,16 @@ export default function GameProvider({ children }) {
     setGuesses([...guesses, guess]);
   };
 
-  const onGuessLetter = (letters) => {
-    console.log(letters);
+  const onGuessLetter = (letter) => {
+ 
+    if(Symbol(letter).valueOf() == true) {
+      console.log('added letter');
 
-    //iterate over the current guess and compare to the guess word
-    const currentGuess = split('', letters).reduce((prev, curr, currIdx) => {
-      let letterModel = letterEntry(curr, currIdx, indexOf(curr, answer));
-      console.log(`letter ${curr} index ${currIdx}`);
-      console.log(letterModel);
+      let currentGuess = [...guess, letterEntry({letter,
+         index: guess.length, 
+         matchPosition: indexOf(letter, answer)})];
 
-      return letterModel;
-    }, []);
+    }
 
     setGuess(currentGuess);
   };
