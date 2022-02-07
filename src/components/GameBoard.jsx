@@ -68,7 +68,7 @@ const GameBoard = (props) => {
           return (<div>{val}</div>);
         })}
       </div>
-      <div id="guessTest">{guess.map((val)=>{return <div>{val}</div>})}</div>;
+      <div id="guessTest">{guess.map((val)=>{return <div key={val.index}>{val.letter}</div>})}</div>;
     </>
   );
 }

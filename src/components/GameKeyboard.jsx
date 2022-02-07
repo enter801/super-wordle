@@ -1,4 +1,5 @@
 import { useGameContext } from "../GameProvider";
+import { useState } from "react";
 
 const letterEntry = ({letter = '', index = '', matchPosition = -1}) => {
   let model = {index, index, matchPosition};
@@ -8,6 +9,7 @@ const letterEntry = ({letter = '', index = '', matchPosition = -1}) => {
 
 const GameKeyboard = ({wordLength}) => {
   const {guess, addGuess, onGuessLetter} = useGameContext();
+  const [guessInput, setGuessInput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,9 +17,9 @@ const GameKeyboard = ({wordLength}) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.currentTarget.value);
-    const toParse = e.currentTarget.value
-
+    const toParse = e.currentTarget.value;
+    console.log(toParse);
+    setGuessInput(toParse);
     onGuessLetter(toParse);
   };
   return (
@@ -28,8 +30,8 @@ const GameKeyboard = ({wordLength}) => {
           pattern="[A-Za-z]+"
           minLength={wordLength}
           maxLength={wordLength}
-          value={guess}
-          onInput={handleChange}
+          value={guessInput}
+          onChange={handleChange}
           name="text"
         />
         <button>Submit</button>

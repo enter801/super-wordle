@@ -1,8 +1,8 @@
 import { createContext, useState, useContext } from "react";
-import { indexOf, reduce, split } from 'ramda';
+import { indexOf, reduce, map, split } from 'ramda';
 
 const letterEntry = ({letter = '', index = '', matchPosition = -1}) => {
-  let model = {index, index, matchPosition};
+  let model = {letter, index, matchPosition};
 
   return model;
 }
@@ -19,18 +19,27 @@ export default function GameProvider({ children }) {
     setGuesses([...guesses, guess]);
   };
 
-  const onGuessLetter = (letter) => {
+  const onGuessLetter = (letters) => {
+
+    //regex check characters
+
+    //if valid, parse into array
+
+    //iterate over and update guess model with letterEntry model
+
+    const newGuess = split('', letters);
  
-    if(Symbol(letter).valueOf() == true) {
-      console.log('added letter');
+    const guessModel = map(letter=>{
+      //LEFT OFF - fix index, do position check from index vs. current index.  
+      //maybe need to change this to a reduce to work better.
+      return letterEntry({
+        letter,
+        index: newGuess.length,
+        matchPosition: indexOf(letter, answer)
+      });
+    }, newGuess);
 
-      let currentGuess = [...guess, letterEntry({letter,
-         index: guess.length, 
-         matchPosition: indexOf(letter, answer)})];
-
-    }
-
-    setGuess(currentGuess);
+    setGuess(guessModel);
   };
 
   return (
