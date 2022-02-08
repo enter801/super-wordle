@@ -2,7 +2,12 @@ import { createContext, useState, useContext } from "react";
 import { indexOf, reduce, map, split } from 'ramda';
 
 const letterEntry = ({letter = '', index = '', matchPosition = -1}) => {
-  let model = {letter, index, matchPosition};
+  //LEFT OFF HERE - Adding match position offset.
+  if(matchPosition >= 0) {
+
+  }
+
+  let model = {letter, index, matchPosition, matchOffset: };
 
   return model;
 }
@@ -28,16 +33,16 @@ export default function GameProvider({ children }) {
     //iterate over and update guess model with letterEntry model
 
     const newGuess = split('', letters);
- 
-    const guessModel = map(letter=>{
-      //LEFT OFF - fix index, do position check from index vs. current index.  
-      //maybe need to change this to a reduce to work better.
-      return letterEntry({
-        letter,
-        index: newGuess.length,
-        matchPosition: indexOf(letter, answer)
-      });
-    }, newGuess);
+
+    const guessModel = newGuess.reduce((prev, curr, idx) => {
+      prev.push(letterEntry({
+        letter: curr,
+        index: idx,
+        matchPosition: indexOf(curr, answer)
+      }));
+
+      return prev;
+    }, []);
 
     setGuess(guessModel);
   };
