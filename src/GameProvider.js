@@ -2,12 +2,19 @@ import { createContext, useState, useContext } from "react";
 import { indexOf, reduce, map, split } from 'ramda';
 
 const letterEntry = ({letter = '', index = '', matchPosition = -1}) => {
-  //LEFT OFF HERE - Adding match position offset.
-  if(matchPosition >= 0) {
+  
+  let matchOffset = -1;
 
+  //if there is a match
+  if(matchPosition >= 0) {
+    if(index === matchPosition) {
+      matchOffset = 0;
+    } else {
+      matchOffset = 1;
+    }
   }
 
-  let model = {letter, index, matchPosition, matchOffset: };
+  let model = {letter, index, matchPosition, matchOffset };
 
   return model;
 }
@@ -22,6 +29,8 @@ export default function GameProvider({ children }) {
 
   const addGuess = (guess) => {
     setGuesses([...guesses, guess]);
+    //clear the guess
+    setGuess([]);
   };
 
   const onGuessLetter = (letters) => {

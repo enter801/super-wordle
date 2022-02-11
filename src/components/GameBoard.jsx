@@ -1,4 +1,6 @@
-import { CardContent, Typography } from "@mui/material";
+import { Stack, CardContent, Paper, Typography } from "@mui/material";
+import { fontSize } from "@mui/system";
+import { styled } from '@mui/material/styles';
 import { useEffect } from "react";
 import { useGameContext } from "../GameProvider";
 import WordCard from "./WordCard";
@@ -22,6 +24,14 @@ const GameBoard = (props) => {
       </>
     );
   };
+
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    fontSize: 28,
+    color: theme.palette.text.secondary,
+  }));
 
   const renderLine = (guess = "", length = wordLength) => {
     //iterate from word length
@@ -62,13 +72,32 @@ const GameBoard = (props) => {
     <>
       <div>
         GameBoard - {props.wordLength} - tries - {props.numTries}
-      </div>
-      <div id="gameBoard">{
-        guesses.map((val, idx) => {
-          return (<div>{val}</div>);
-        })}
-      </div>
-      <div id="guessTest">{guess.map((val)=>{return <div key={val.index}>{val.letter}</div>})}</div>;
+      </div>      
+      <Stack direction="column" spacing={2}>{
+        guesses.map((row, idx) => {
+          return (
+            <Stack key={idx} direction="row" spacing={2}>             
+              {row.map((val) => {
+                return (                    
+                  <Item key={val.index}>
+                    {val.letter}
+                  </Item>)
+                })
+              }              
+            </Stack>);
+          }
+        )
+      }
+      </Stack>
+      <Stack direction="row" spacing={2}>             
+        {guess.map((val) => {
+          return (                    
+            <Item key={val.index}>
+              {val.letter}
+            </Item>)
+          })
+        }              
+      </Stack>
     </>
   );
 }
