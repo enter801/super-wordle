@@ -35,12 +35,6 @@ export default function GameProvider({ children }) {
 
   const onGuessLetter = (letters) => {
 
-    //regex check characters
-
-    //if valid, parse into array
-
-    //iterate over and update guess model with letterEntry model
-
     const newGuess = split('', letters);
 
     const guessModel = newGuess.reduce((prev, curr, idx) => {
