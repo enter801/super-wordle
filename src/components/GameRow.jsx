@@ -10,10 +10,10 @@ const GameRow = ({submittedGuess}) => {
             submittedGuess.map((val) => {
               return ( 
                 <GameTile key={val.index} guessData={val}></GameTile>                   
-              )
+              );
               })
           }              
-        </Stack>);
+        </Stack>
       </>
     )
 }
